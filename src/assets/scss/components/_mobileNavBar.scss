@@ -1,0 +1,117 @@
+// 各頁面下的 navbar 底色
+.page-wrapper {
+  .navbar {
+    background-color: rgba(31, 31, 31, 0.6);
+  }
+}
+
+#mobile-navbar {
+  display: none;
+  @include small {
+    display: block;
+    background-color: $secondaryColor;
+    height: 60px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(4, 7, 14, 0.8);
+  }
+  @include extraSmall {
+    display: block;
+    background-color: $secondaryColor;
+    height: 65px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(4, 7, 14, 0.8);
+  }
+}
+
+body.fixed-menu {
+  .mobile-navbar.navbar {
+    z-index: auto;
+  }
+}
+
+.mobile-navbar {
+  &.navbar {
+    z-index: 1001;
+    .navbar-toggle {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      border-radius: 4px;
+      z-index: 2002;
+      @include extraSmall {
+        left: 7px;
+      }
+      &.fixed {
+        z-index: 2010;
+      }
+
+      .hamburger {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: transform 400ms;
+        user-select: none;
+        .top {
+          stroke-dasharray: 40 160;
+        }
+        .middle {
+          stroke-dasharray: 40 142;
+          transform-origin: 50%;
+          transition: transform 400ms;
+        }
+        .bottom {
+          stroke-dasharray: 40 85;
+          transform-origin: 50%;
+          transition: transform 400ms, stroke-dashoffset 400ms;
+        }
+        &.active {
+          transform: rotate(45deg);
+          .top {
+            stroke-dashoffset: -64px;
+          }
+          .middle {
+            transform: rotate(90deg);
+          }
+          .bottom {
+            stroke-dashoffset: -64px;
+          }
+        }
+      }
+      .line {
+        fill: none;
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        stroke: #fff;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+      }
+    }
+
+    .navbar-brand {
+      display: inline-block;
+      font-size: 18px;
+      padding: 0;
+      margin: 0;
+      z-index: 990;
+      display: inline-block;
+      width: 228px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      @include extraSmall {
+        width: 60%;
+        left: calc(50% + 20px);
+      }
+      &.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .logo {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

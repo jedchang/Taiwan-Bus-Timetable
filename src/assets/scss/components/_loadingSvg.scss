@@ -1,0 +1,72 @@
+svg.loader {
+  fill: none;
+  width: 350px;
+  height: 350px;
+  stroke: $textLightPrimaryColor;
+  stroke-width: 3;
+  @include small {
+    width: 65%;
+  }
+  @include extraSmall {
+    width: 65%;
+  }
+  .bus {
+    stroke: $textPrimaryColor;
+    z-index: 0;
+    transform-origin: center center;
+    animation: bus 600ms linear infinite;
+  }
+  .wheel {
+    z-index: 2;
+    stroke: $textPrimaryColor;
+    fill: $textPrimaryColor;
+    &.front-wheel {
+      transform-origin: 473.8px 399.6px; 
+      animation: wheel 300ms linear infinite;
+      animation-delay: 200ms;
+    }
+    &.back-wheel {
+      transform-origin: 169.8px 399.6px;
+      animation: wheel 300ms linear infinite;
+    }
+    path.st2 {
+      stroke: $textLightPrimaryColor;
+      fill: $textPrimaryColor;
+    }
+    path.st3 {
+      stroke: $textLightPrimaryColor;
+    }
+  }
+  .line {
+    stroke: #ff4c29;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 7px;
+    &.line-1 {
+      stroke-dasharray: 20% 80%;
+      animation: line 0.7s linear infinite;
+    }
+    &.line-2 {
+      stroke-dasharray: 10% 90%;
+      animation: line 0.6s linear infinite;
+      animation-delay: 200ms;
+    }
+    &.line-floor {
+      stroke: $textPrimaryColor;
+      stroke-width: 8px;
+      animation: line-floor 800ms linear infinite;
+    }
+    &.line-floor-2 {
+      stroke: $textPrimaryColor;
+      stroke-width: 8px;
+      animation: line-floor 1000ms linear infinite;
+      animation-delay: 200ms;
+    }
+  }
+  .cloud {
+    stroke: $textPrimaryColor;
+    fill: $textPrimaryColor;
+    opacity: 0.2;
+    animation: cloud 1200ms linear infinite;
+  }
+}

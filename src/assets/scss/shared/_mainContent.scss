@@ -1,0 +1,90 @@
+.main-content {
+  padding: 10px 10px;
+  border-radius: 4px;
+  @include medium {
+    padding: 0;
+  }
+  @include small {
+    padding: 0;
+  }
+  @include extraSmall {
+    padding: 0;
+  }
+  .share-title {
+    text-align: center;
+    .line {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 500;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      color: $primaryColor;
+      position: relative;
+      padding: 0 55px;
+      margin: 0 0 10px;
+      @include small {
+        font-size: 14px;
+      }
+      @include extraSmall {
+        font-size: 14px;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background-color: #ff5e14;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background-color: #ff5e14;
+      }
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 40px;
+      font-size: 46px;
+      font-weight: bold;
+      color: $tertiaryColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include medium {
+        font-size: 42px;
+      }
+      @include small {
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
+      @include extraSmall {
+        font-size: 28px;
+        margin-bottom: 15px;
+      }
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: bold;
+      margin: 0;
+      color: $textSecondaryColor;
+      @include small {
+        font-size: 14px;
+      }
+      @include extraSmall {
+        font-size: 14px;
+      }
+    }
+    .material-icons {
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.footer {
+  background-color: #1e2230;
+  padding: 35px 12px;
+
+  .desktop {
+    display: block;
+    @include small {
+      display: none;
+    }
+    @include extraSmall {
+      display: none;
+    }
+    .copyright-text {
+      padding: 15px 0;
+      text-align: center;
+      font-size: 14px;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      letter-spacing: 0.28px;
+      line-height: 1.3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #79829c;
+    }
+    .material-icons {
+      font-size: 16px;
+      margin: 0 5px;
+    }
+    a {
+      font-size: 14px;
+      letter-spacing: 0.42px;
+      font-weight: 500;
+      display: inline-block;
+      margin-left: 5px;
+      color: #79829c;
+      transition: $setTransition;
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .mobile {
+    display: none;
+    @include small {
+      display: block;
+      .txt {
+        text-align: center;
+        font-size: 14px;
+        letter-spacing: 0.28px;
+        line-height: 1.3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #79829c;
+        &.copyright-text {
+          margin-bottom: 3px;
+        }
+      }
+      .material-icons {
+        font-size: 16px;
+        margin: 0 5px;
+      }
+      a {
+        font-size: 14px;
+        letter-spacing: 0.42px;
+        font-weight: 500;
+        display: inline-block;
+        margin-left: 5px;
+        color: #79829c;
+        transition: $setTransition;
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+    }
+    @include extraSmall {
+      display: block;
+      .txt {
+        text-align: center;
+        font-size: 14px;
+        letter-spacing: 0.28px;
+        line-height: 1.3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #79829c;
+        &.copyright-text {
+          margin-bottom: 3px;
+        }
+      }
+      .material-icons {
+        font-size: 16px;
+        margin: 0 5px;
+      }
+      a {
+        font-size: 14px;
+        letter-spacing: 0.42px;
+        font-weight: 500;
+        display: inline-block;
+        margin-left: 5px;
+        color: #79829c;
+        transition: $setTransition;
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+}

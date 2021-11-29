@@ -1,0 +1,294 @@
+.wrapper {
+  section.header {
+    background: #1f1f1f;
+    background-image: url('~@/assets/images/index-bg.jpg');
+    background-position: 50% 90%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 850px;
+    position: relative;
+    @include small {
+      height: 650px;
+    }
+    @include extraSmall {
+      height: 550px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      background: rgba(51, 51, 51, 0.59) url('~@/assets/images/dot-overlay.png');
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -250px;
+      width: 100%;
+      height: 250px;
+      background: #ff7623;
+      @include extraSmall {
+        bottom: -150px;
+        height: 150px;
+      }
+    }
+
+    .banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: absolute;
+      left: 50%;
+      bottom: -185px;
+      z-index: 2;
+      transform: translateX(-50%);
+      @include extraSmall {
+        bottom: -130px;
+      }
+      .title {
+        color: $textLightPrimaryColor;
+        margin-bottom: 15px;
+        h1 {
+          font-size: 62px;
+          margin: 0;
+          color: #fff;
+          text-transform: uppercase;
+          font-family: 'Rubik', Helvetica, Arial, sans-serif;
+          @include large {
+            font-size: 52px;
+          }
+          @include medium {
+            font-size: 48px;
+          }
+          @include small {
+            font-size: 42px;
+          }
+          @include extraSmall {
+            font-size: 38px;
+          }
+        }
+        p {
+          font-size: 26px;
+          font-weight: 600;
+          margin-top: 10px;
+          letter-spacing: 20px;
+          @include large {
+            font-size: 24px;
+            letter-spacing: 10px;
+            font-weight: 500;
+          }
+          @include medium {
+            font-size: 22px;
+            letter-spacing: 8px;
+            font-weight: 500;
+          }
+          @include small {
+            font-size: 22px;
+            letter-spacing: 5px;
+            font-weight: 500;
+          }
+          @include extraSmall {
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-weight: 400;
+          }
+        }
+      }
+      .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 240px;
+        padding: 20px 40px;
+        border-radius: 30px;
+        color: #fff;
+        background-color: $primaryColor;
+        margin: 20px 0 80px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        @include small {
+          width: 200px;
+          padding: 15px 30px;
+        }
+        @include extraSmall {
+          width: 90%;
+          padding: 15px 20px;
+        }
+        &:hover {
+          color: $primaryColor;
+          background-color: #fff;
+          font-weight: 500;
+        }
+        .material-icons {
+          margin-right: 5px;
+        }
+      }
+      .bus-image {
+        position: relative;
+        .bus {
+          width: 100%;
+          @include extraSmall {
+            width: 92%;
+          }
+        }
+        .splash {
+          opacity: 0;
+          position: absolute;
+          z-index: 2;
+          top: 254px;
+          left: -28px;
+          animation: bus-splash 10s normal 1.5s forwards infinite linear;
+          @include small {
+            width: 270px;
+            top: 189px;
+            left: -23px;
+          }
+          @include extraSmall {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .page-content {
+    margin-top: 250px; // 公車 bg bottom: -250px;
+    @include extraSmall {
+      margin-top: 150px;
+    }
+  }
+
+  // .full-bg {
+  //   padding: 150px 0 70px 0;
+  //   height: 250px;
+  //   background: #ff7623;
+  //   @include extraSmall {
+  //     padding: 50px 0;
+  //     height: 200px;
+  //   }
+  // }
+
+  section.service {
+    padding: 30px 0 120px;
+    text-align: center;
+    @include small {
+      padding: 30px;
+    }
+    @include extraSmall {
+      padding: 30px;
+    }
+    .section-title {
+      .line {
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Rubik', Helvetica, Arial, sans-serif;
+        color: $primaryColor;
+        position: relative;
+        padding: 0 55px;
+        margin: 40px 0 10px;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 40px;
+          height: 2px;
+          background-color: #ff5e14;
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          width: 40px;
+          height: 2px;
+          background-color: #ff5e14;
+        }
+      }
+      h2 {
+        margin-top: 0;
+        margin-bottom: 40px;
+        font-size: 46px;
+        font-weight: bold;
+        color: $tertiaryColor;
+        @include small {
+          font-size: 42px;
+        }
+        @include extraSmall {
+          font-size: 32px;
+        }
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        font-weight: bold;
+        margin: 0;
+        color: $textSecondaryColor;
+      }
+    }
+
+    .section-service {
+      margin-top: 100px;
+      .dotted-line {
+        background: url('~@/assets/images/dotted-line.png') 100% 0% repeat-y;
+        color: $tertiaryColor;
+        @include small {
+          background: none;
+          border-bottom: 1px dashed $textLightPrimaryColor;
+          margin-bottom: 30px;
+          padding-bottom: 30px;
+          &:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+          }
+        }
+        @include extraSmall {
+          background: none;
+          border-bottom: 1px dashed $textLightPrimaryColor;
+          margin-bottom: 30px;
+          padding-bottom: 30px;
+          &:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+          }
+        }
+        &:last-child {
+          background: none;
+        }
+        .icon {
+          height: 70px;
+          line-height: 70px;
+          img {
+            width: auto;
+          }
+        }
+        h5 {
+          font-size: 24px;
+          font-weight: bold;
+          margin: 30px 0 20px 0;
+          @include small {
+            margin: 10px 0;
+          }
+          @include extraSmall {
+            margin: 10px 0;
+          }
+        }
+        p {
+          font-size: 16px;
+          line-height: 1.6;
+          color: $textSecondaryColor;
+        }
+      }
+    }
+  }
+}

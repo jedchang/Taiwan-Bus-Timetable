@@ -1,0 +1,115 @@
+.page-content {
+  padding: 100px 0;
+  @include small {
+    padding: 60px 0;
+  }
+  @include extraSmall {
+    padding: 60px 0;
+  }
+}
+
+.faq-content {
+  margin: 60px auto 20px;
+  .el-collapse {
+    border-top: none;
+    border-bottom: none;
+  }
+
+  /deep/ .el-collapse-item {
+    margin-bottom: 20px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    position: relative;
+    &:hover {
+      span {
+        color: $primaryColor;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &.is-active {
+      border: 1px solid #c1c1c1;
+      .el-collapse-item__header {
+        border-bottom: 1px solid #e9e9e9;
+      }
+      span {
+        color: $primaryColor;
+      }
+      .material-icons {
+        color: $primaryColor;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -2px;
+        width: 2px;
+        height: 100%;
+        background-color: $primaryColor;
+      }
+    }
+    span {
+      color: $secondaryColor;
+      font-weight: bold;
+      transition: $setTransition;
+    }
+
+    .el-collapse-item__header {
+      font-size: 18px;
+      font-weight: bold;
+      color: $tertiaryColor;
+      padding: 20px 20px;
+      height: 70px;
+      line-height: 70px;
+      border-bottom: none;
+      @include small {
+        font-size: 16px;
+        padding: 15px 15px;
+        height: 50px;
+        line-height: 50px;
+      }
+      @include extraSmall {
+        font-size: 14px;
+        padding: 15px 15px;
+        height: auto;
+        line-height: inherit;
+        text-align: left;
+      }
+      .material-icons {
+        margin-right: 5px;
+        font-weight: 400;
+      }
+    }
+
+    .el-collapse-item__wrap {
+      border-bottom: none;
+    }
+
+    .el-collapse-item__content {
+      padding: 20px 20px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: $textSecondaryColor;
+      a {
+        color: $secondaryLightColor;
+      }
+      div {
+        font-size: 16px;
+        margin-bottom: 10px;
+        @include small {
+          font-size: 12px;
+          font-weight: 400;
+        }
+        @include extraSmall {
+          font-size: 12px;
+          font-weight: 400;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

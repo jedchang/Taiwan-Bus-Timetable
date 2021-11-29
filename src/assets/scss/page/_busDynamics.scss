@@ -1,0 +1,891 @@
+.page-content {
+  padding: 100px 0;
+  @include medium {
+    padding: 60px 0;
+  }
+  @include small {
+    padding: 60px 0;
+  }
+  @include extraSmall {
+    padding: 60px 0;
+  }
+}
+
+.bus-dynamics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .remark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .material-icons {
+    font-size: 32px;
+    margin-left: 2px;
+    color: $tertiaryColor;
+    animation: flash 1.5s infinite;
+    @include small {
+      font-size: 28px;
+    }
+    @include extraSmall {
+      font-size: 26px;
+    }
+  }
+}
+
+.display-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 0 30px 0;
+  flex-direction: column;
+  @include extraSmall {
+    margin: 0 0 20px 0;
+  }
+  .name-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 6px;
+    margin-top: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    @include medium {
+      padding: 20px 20px;
+      margin-top: 30px;
+    }
+    @include small {
+      flex-direction: column;
+      padding: 30px 20px;
+      margin-top: 20px;
+    }
+    @include extraSmall {
+      flex-direction: column;
+      padding: 30px 20px;
+      margin-top: 20px;
+    }
+  }
+  .route-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-right: 1px solid #9fa3a9;
+    padding-right: 15px;
+    @include small {
+      border-right: none;
+      margin-bottom: 20px;
+      padding-right: 0;
+    }
+    @include extraSmall {
+      border-right: none;
+      margin-bottom: 20px;
+      padding-right: 0;
+    }
+    .txt {
+      text-transform: uppercase;
+      color: #ababab;
+      margin: 0 0 5px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+    }
+    .route {
+      color: $primaryColor;
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      @include medium {
+        font-size: 20px;
+      }
+      @include small {
+        font-size: 24px;
+      }
+      @include extraSmall {
+        font-size: 20px;
+      }
+    }
+  }
+  .outward-return {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 15px;
+    @include small {
+      padding-left: 0;
+    }
+    @include extraSmall {
+      padding-left: 0;
+    }
+    .txt {
+      text-transform: uppercase;
+      color: #ababab;
+      margin: 0 0 5px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+    }
+    .outward-return-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .name-item {
+        font-size: 36px;
+        font-weight: 600;
+        @include medium {
+          font-size: 20px;
+        }
+        @include small {
+          font-size: 24px;
+        }
+        @include extraSmall {
+          font-size: 20px;
+        }
+      }
+      .material-icons {
+        transform: rotate(90deg);
+        margin: 0 5px;
+        font-size: 42px;
+        color: $secondaryLightColor;
+        @include medium {
+          font-size: 22px;
+        }
+        @include small {
+          font-size: 32px;
+          margin: 0 0;
+        }
+        @include extraSmall {
+          font-size: 22px;
+          margin: 0 0;
+        }
+      }
+    }
+  }
+
+  .sub-name-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    flex-direction: column;
+    width: 100%;
+    .sub-route-name {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      margin-bottom: 15px;
+      &.no-data {
+        color: #a5a5a5;
+        margin-bottom: 0;
+        .route {
+          color: #a5a5a5;
+        }
+      }
+      .txt {
+        margin: 0;
+      }
+      .route {
+        color: $secondaryLightColor;
+        font-size: 26px;
+        font-weight: 600;
+        margin: 0;
+        margin: 0 5px;
+      }
+    }
+    .sub-route-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .item {
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-size: 18px;
+        color: $secondaryColor;
+        border: 1px solid $secondaryColor;
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+        &:hover {
+          color: $secondaryLightColor;
+          border: 1px solid $secondaryLightColor;
+        }
+        &.active {
+          color: $secondaryLightColor;
+          border: 1px solid $secondaryLightColor;
+          pointer-events: none;
+          cursor: default;
+          &:hover {
+            color: $secondaryLightColor;
+            background-color: transparent;
+            border: 1px solid $secondaryLightColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+.display-stops-map {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 80px 0;
+  @include large {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+  }
+  @include medium {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+  }
+  @include small {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+  }
+  @include extraSmall {
+    flex-direction: column-reverse;
+    margin: 20px 0;
+  }
+}
+
+section.stops-content {
+  width: 44%;
+  height: 600px;
+  @include large {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: 50px;
+    &.active {
+      margin-top: 40px;
+      height: auto;
+    }
+  }
+  @include medium {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: 50px;
+    &.active {
+      margin-top: 40px;
+      height: auto;
+    }
+  }
+  @include small {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: 30px;
+    &.active {
+      margin-top: 20px;
+      height: auto;
+    }
+  }
+  @include extraSmall {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: 120px;
+    &.active {
+      margin-top: 110px;
+      height: auto;
+    }
+  }
+}
+
+section.map-content {
+  width: 55%;
+  height: 600px;
+  padding-top: 77px;
+  transition: height 0.4s ease-in;
+  @include large {
+    width: 100%;
+    height: 400px;
+    padding-top: 0;
+    margin-top: 0px;
+    position: relative;
+    &.active {
+      height: 0;
+      margin-top: 0;
+      #map {
+        height: 0;
+      }
+    }
+  }
+  @include medium {
+    width: 100%;
+    height: 400px;
+    padding-top: 0;
+    margin-top: 0px;
+    position: relative;
+    &.active {
+      height: 0;
+      margin-top: 0;
+      #map {
+        height: 0;
+      }
+    }
+  }
+  @include small {
+    width: 100%;
+    height: 400px;
+    padding-top: 0;
+    margin-top: 0px;
+    position: relative;
+    &.active {
+      height: 0;
+      margin-top: 0;
+      #map {
+        height: 0;
+      }
+    }
+  }
+  @include extraSmall {
+    width: 100%;
+    height: 300px;
+    padding-top: 0;
+    margin-top: 0px;
+    position: relative;
+    &.active {
+      height: 0;
+      margin-top: 0;
+      #map {
+        height: 0;
+      }
+    }
+  }
+  .btn-map-toggle {
+    display: none;
+    @include large {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid $tertiaryColor;
+      color: $tertiaryColor;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 20;
+      transition: $setTransition;
+      &:hover {
+        color: #fff;
+        background-color: $primaryColor;
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+      }
+    }
+    @include medium {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid $tertiaryColor;
+      color: $tertiaryColor;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 20;
+      transition: $setTransition;
+      &:hover {
+        color: #fff;
+        background-color: $primaryColor;
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+      }
+    }
+    @include small {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid $tertiaryColor;
+      color: $tertiaryColor;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 20;
+      transition: $setTransition;
+      &:hover {
+        color: #fff;
+        background-color: $primaryColor;
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+      }
+    }
+    @include extraSmall {
+      display: inline-block;
+      padding: 15px 20px;
+      border: 1px solid $tertiaryColor;
+      color: $tertiaryColor;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      width: 90%;
+      transition: $setTransition;
+      &:hover {
+        color: #fff;
+        background-color: $primaryColor;
+        border: 1px solid $primaryColor;
+        cursor: pointer;
+      }
+    }
+  }
+  #map {
+    width: 100%;
+    height: 600px;
+    z-index: 10;
+    margin-top: 15px;
+    transition: height 0.4s ease-in;
+    @include large {
+      margin-top: 0;
+      height: 400px;
+    }
+    @include medium {
+      margin-top: 0;
+      height: 400px;
+    }
+    @include small {
+      margin-top: 0;
+      height: 400px;
+    }
+    @include extraSmall {
+      margin-top: 0;
+      height: 300px;
+      margin-top: 100px;
+    }
+  }
+}
+
+.list {
+  padding: 20px 20px;
+  @include large {
+    padding: 0;
+  }
+  @include medium {
+    padding: 0;
+  }
+  @include small {
+    padding: 0;
+  }
+  @include extraSmall {
+    padding: 0;
+  }
+  .item-thead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: $secondaryColor;
+    color: #fff;
+    padding: 15px 25px;
+    @include small {
+      padding: 15px 10px;
+    }
+    @include extraSmall {
+      padding: 15px 10px;
+    }
+  }
+  .item-tbody {
+    height: calc(600px - 48px);
+    overflow-y: scroll;
+    &.hidden {
+      height: auto;
+      overflow-y: hidden;
+    }
+
+    .item-col {
+      &.stop-sequence {
+        font-size: 14px;
+        @include small {
+          font-size: 14px;
+        }
+        @include extraSmall {
+          font-size: 12px;
+        }
+      }
+      &.stop-name {
+        font-weight: 600;
+      }
+    }
+  }
+  .item-col {
+    text-align: center;
+    font-size: 16px;
+    @include small {
+      font-size: 14px;
+    }
+    @include extraSmall {
+      font-size: 12px;
+    }
+    &.stop-sequence {
+      flex-basis: 10%;
+      @include small {
+        flex-basis: 15%;
+      }
+      @include extraSmall {
+        flex-basis: 15%;
+      }
+    }
+    &.stop-status {
+      flex-basis: 35%;
+    }
+    &.stop-name {
+      flex-basis: 55%;
+      @include small {
+        flex-basis: 50%;
+      }
+      @include extraSmall {
+        flex-basis: 50%;
+      }
+    }
+  }
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 25px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: -1px;
+    color: #707070;
+    transition: $setTransition;
+    @include small {
+      padding: 15px 10px;
+    }
+    @include extraSmall {
+      padding: 15px 10px;
+    }
+    &:hover {
+      background-color: #f3f3f3;
+    }
+    &:last-child {
+      border-bottom: none;
+      .number {
+        &:before {
+          content: none;
+        }
+      }
+    }
+
+    .status {
+      padding: 10px;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 14px;
+      @include small {
+        width: 90%;
+        font-size: 14px;
+      }
+      @include extraSmall {
+        width: 90%;
+        font-size: 12px;
+      }
+      &.status-0 {
+        color: #12a353;
+        background-color: #d8ede1;
+        &.status-enter {
+          color: #f72900;
+          background-color: #ffd8d0;
+        }
+      }
+      &.status-1 {
+        color: #876300;
+        background-color: #f3e3c1;
+      }
+      &.status-2 {
+        color: #0068ad;
+        background-color: #c3def0;
+      }
+      &.status-3 {
+        color: #c403eb;
+        background-color: #d0b1d6;
+      }
+      &.status-4 {
+        color: #3b3b3b;
+        background-color: #bbbbbb;
+      }
+    }
+    .number {
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      .round {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px;
+        margin: 0 auto;
+        color: #fff;
+        background-color: #9e9e9e;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: -1;
+        @include small {
+          width: 30px;
+          height: 30px;
+        }
+        @include extraSmall {
+          width: 30px;
+          height: 30px;
+        }
+      }
+      &.number-enter {
+        .round {
+          background-color: #ff5e14;
+          &:before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            animation: round-pulse 1.2s infinite;
+            animation-delay: 1.2s;
+            @include small {
+              width: 30px;
+              height: 30px;
+            }
+            @include extraSmall {
+              width: 30px;
+              height: 30px;
+            }
+          }
+          &:after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            animation: round-pulse 1.2s infinite;
+            @include small {
+              width: 30px;
+              height: 30px;
+            }
+            @include extraSmall {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 100px;
+        background-color: #9e9e9e;
+        z-index: -1;
+      }
+    }
+  }
+}
+
+.no-data {
+  height: 600px;
+  margin-top: 92px;
+  background-color: #f4f4f4;
+  position: relative;
+  @include large {
+    height: 300px;
+    margin-top: 0;
+  }
+  @include medium {
+    height: 300px;
+    margin-top: 0;
+  }
+  @include small {
+    height: 300px;
+    margin-top: 20px;
+  }
+  @include extraSmall {
+    height: 200px;
+    margin-top: 25px;
+  }
+  .txt-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    color: lighten($primaryColor, 20%);
+    animation: flash 1.5s linear infinite;
+    @include extraSmall {
+      align-items: center;
+      flex-direction: column;
+    }
+    .material-icons {
+      font-size: 52px;
+      margin-right: 7px;
+      @include small {
+        font-size: 40px;
+      }
+      @include extraSmall {
+        font-size: 38px;
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+    .txt {
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      @include small {
+        font-size: 18px;
+      }
+      @include extraSmall {
+        text-align: center;
+        font-size: 18px;
+        span {
+          margin-bottom: 5px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.timer-item {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  width: 90px;
+  height: 90px;
+  bottom: 140px;
+  right: 30px;
+  background-color: $primaryColor;
+  z-index: 100;
+  border-radius: 50%;
+  box-shadow: 1px 2px 6px 4px rgba(53, 57, 68, 0.2);
+  transition: $setTransition;
+  @include small {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    top: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  @include extraSmall {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    top: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  &:hover {
+    background-color: $primaryColor;
+    svg {
+      color: #fff;
+    }
+  }
+  &.show {
+    opacity: 1;
+    right: 35px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include small {
+      flex-direction: row;
+      height: 28px;
+      line-height: 28px;
+    }
+    @include extraSmall {
+      flex-direction: row;
+      height: 28px;
+      line-height: 28px;
+    }
+    .timer {
+      color: #fff;
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        font-family: '微軟正黑體', sans-serif;
+        &.number {
+          display: inline-block;
+          width: 25px;
+          font-size: 18px;
+          font-weight: 600;
+          font-family: 'Rubik', Helvetica, Arial, sans-serif;
+          @include small {
+            width: 30px;
+            font-size: 22px;
+            margin-right: 3px;
+          }
+          @include extraSmall {
+            width: 30px;
+            font-size: 22px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+    .txt {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 3px;
+      @include small {
+        margin-bottom: 0;
+        margin-right: 7px;
+      }
+      @include extraSmall {
+        margin-bottom: 0;
+        margin-right: 7px;
+      }
+    }
+  }
+}

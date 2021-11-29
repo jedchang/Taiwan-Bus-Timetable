@@ -1,0 +1,115 @@
+section.gallery {
+  padding: 30px 0 120px;
+  @include small {
+    padding: 30px;
+  }
+  @include extraSmall {
+    padding: 30px;
+  }
+  text-align: center;
+  background-color: #f5f5f5;
+  .section-title {
+    .line {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 500;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      color: $primaryColor;
+      position: relative;
+      padding: 0 55px;
+      margin: 40px 0 10px;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background-color: #ff5e14;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background-color: #ff5e14;
+      }
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 40px;
+      font-size: 46px;
+      font-weight: bold;
+      color: $tertiaryColor;
+      @include small {
+        font-size: 42px;
+      }
+      @include extraSmall {
+        font-size: 32px;
+      }
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: bold;
+      margin: 0;
+      color: $textSecondaryColor;
+    }
+  }
+
+  .section-photo {
+    margin-top: 100px;
+    /deep/ .my-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-wrap: wrap;
+      .gallery-thumbnail {
+        width: auto;
+        @include medium {
+          width: 46%;
+        }
+        a {
+          background-color: transparent;
+          display: block;
+          position: relative;
+          &:hover {
+            &:before {
+              background-color: $primaryColor;
+              opacity: 0.4;
+            }
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            opacity: 0;
+            transition: $setTransition;
+            @include medium {
+              width: 100%;
+              height: 213.44px;
+            }
+            @include small {
+              content: none;
+            }
+            @include extraSmall {
+              content: none;
+            }
+          }
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

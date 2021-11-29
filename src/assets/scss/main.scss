@@ -1,0 +1,286 @@
+html {
+  padding: 0;
+  margin: 0;
+  // overflow: hidden; // 解決 el-dialog 出現後滾動至頂點
+  // height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  // overflow: auto; // 解決 el-dialog 出現後滾動至頂點
+  // height: 100%;
+  // 為了讓手機選單不要滑動，需在 body 固定住，內頁選單才能依裝置高度置中
+  &.fixed-menu {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#app {
+  font-family: '微軟正黑體', sans-serif;
+  // font-family: 'Rubik', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $textPrimaryColor;
+  user-select: none;
+  color: $tertiaryColor;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    transition: $setTransition;
+  }
+
+  .form-control:focus {
+    outline: none;
+    box-shadow: none !important;
+  }
+
+  // loading
+  .vld-overlay .vld-background {
+    background-color: $textLightPrimaryColor;
+    opacity: 1;
+  }
+
+  // .vld-icon {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   flex-direction: column;
+  // }
+  // .vld-overlay {
+  //   overflow: hidden;
+  //   height: 100%;
+  // }
+  .vld-overlay.is-full-page {
+    z-index: 9999;
+  }
+}
+
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+
+.page-container {
+  padding: 80px 0;
+}
+
+// el-dialog 垂直置中
+.el-dialog {
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 60% !important;
+  margin: 0 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 30px);
+  max-height: calc(100% - 30px);
+  @include small {
+    width: 90% !important;
+  }
+  @include extraSmall {
+    width: 90% !important;
+  }
+  .el-dialog__header {
+    background-color: $tertiaryColor;
+    .el-dialog__title {
+      color: #fff;
+    }
+    .el-dialog__headerbtn {
+      .el-dialog__close {
+        transition: $setTransition;
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+  .el-dialog__body {
+    flex: 1;
+    overflow: hidden;
+    span {
+      font-size: 16px;
+      line-height: 1.6;
+      color: $textSecondaryColor;
+      font-weight: 600;
+      @include small {
+        font-size: 12px;
+      }
+      @include extraSmall {
+        font-size: 12px;
+      }
+    }
+    strong {
+      color: $secondaryLightColor;
+    }
+  }
+  .el-dialog__footer {
+    .el-button {
+      padding: 12px 40px;
+      color: $tertiaryColor;
+      background-color: #fff5f4;
+      border-color: #ffe3dd;
+      transition: $setTransition;
+      &:hover {
+        color: $primaryColor;
+        background-color: #ffffff;
+      }
+    }
+    .el-button--primary {
+      color: #ffe3dd;
+      background-color: $primaryColor;
+      border-color: $primaryColor;
+      transition: $setTransition;
+      &:hover {
+        color: #fff;
+        background-color: darken($primaryColor, 20%);
+      }
+    }
+  }
+}
+
+// 同一 tab 上無法點擊
+.el-tabs__item.is-active {
+  pointer-events: none;
+  cursor: default;
+}
+
+// custom element ui
+.el-select {
+  width: 100%;
+}
+
+// 行動版下拉寬度
+.el-select-dropdown__wrap {
+  @include extraSmall {
+    max-width: 235px;
+  }
+}
+
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  pointer-events: none;
+  cursor: default;
+}
+
+.el-tabs__item {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 40px;
+  height: auto;
+  line-height: inherit;
+  @include small {
+    font-size: 16px;
+    padding: 16px 16px;
+  }
+  @include extraSmall {
+    font-size: 14px;
+    padding: 16px 12px;
+  }
+  &.is-active {
+    color: $primaryColor;
+  }
+  &:hover {
+    color: $primaryColor;
+  }
+  span.label {
+    font-size: 18px;
+    color: $tertiaryColor;
+    @include small {
+      font-size: 16px;
+    }
+    @include extraSmall {
+      font-size: 14px;
+    }
+  }
+  span.route {
+    font-size: 20px;
+    font-weight: bold;
+    color: $primaryColor;
+    @include small {
+      font-size: 18px;
+    }
+    @include extraSmall {
+      font-size: 14px;
+    }
+  }
+  &#tab-outward {
+    .material-icons {
+      transform: rotate(180deg);
+    }
+  }
+  &#tab-return {
+    .material-icons {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: $primaryColor;
+}
+
+.el-select-dropdown__item.selected {
+  color: $primaryColor;
+}
+
+.el-select .el-input__inner:focus {
+  border-color: $primaryColor;
+}
+
+.el-tabs--card > .el-tabs__header {
+  border-bottom: 1px solid #b9b9b9;
+  @include large {
+    margin: 0 0 30px;
+  }
+}
+.el-tabs--card > .el-tabs__header .el-tabs__nav {
+  border: 1px solid #b9b9b9;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item {
+  border-left: 1px solid #b9b9b9;
+}
+
+.el-tabs--bottom .el-tabs--left > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--bottom .el-tabs--right > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--bottom.el-tabs--border-card
+  > .el-tabs__header
+  .el-tabs__item:last-child,
+.el-tabs--bottom.el-tabs--card > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--top .el-tabs--left > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--top .el-tabs--right > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--top.el-tabs--border-card > .el-tabs__header .el-tabs__item:last-child,
+.el-tabs--top.el-tabs--card > .el-tabs__header .el-tabs__item:last-child {
+  padding-right: 40px;
+}
+
+.el-tabs--bottom .el-tabs--left > .el-tabs__header .el-tabs__item:nth-child(2),
+.el-tabs--bottom .el-tabs--right > .el-tabs__header .el-tabs__item:nth-child(2),
+.el-tabs--bottom.el-tabs--border-card
+  > .el-tabs__header
+  .el-tabs__item:nth-child(2),
+.el-tabs--bottom.el-tabs--card > .el-tabs__header .el-tabs__item:nth-child(2),
+.el-tabs--top .el-tabs--left > .el-tabs__header .el-tabs__item:nth-child(2),
+.el-tabs--top .el-tabs--right > .el-tabs__header .el-tabs__item:nth-child(2),
+.el-tabs--top.el-tabs--border-card
+  > .el-tabs__header
+  .el-tabs__item:nth-child(2),
+.el-tabs--top.el-tabs--card > .el-tabs__header .el-tabs__item:nth-child(2) {
+  padding-left: 40px;
+}

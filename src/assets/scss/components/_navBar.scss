@@ -1,0 +1,141 @@
+.page-wrapper {
+  .navbar {
+    background-color: rgba(31, 31, 31, 0.6);
+  }
+}
+
+#desktop-navbar {
+  display: flex;
+  @include small {
+    display: none;
+  }
+  @include extraSmall {
+    display: none;
+  }
+}
+
+.desktop-navbar {
+  &.navbar {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 110px;
+    z-index: 1001;
+    padding: 8px 16px;
+    background-color: transparent;
+    transition: $setTransition;
+    &.sticky-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 80px;
+      padding: 0;
+      background-color: rgba(2, 11, 18, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid #363333;
+      box-shadow: 0 0 10px rgba(4, 7, 14, 0.8);
+      z-index: 1002;
+      .main {
+        .menu-item {
+          padding: 13px 24px;
+          font-weight: bold;
+          @include medium {
+            padding: 10px 10px;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-inner {
+      width: 100%;
+      display: block;
+      .navbar-header {
+        margin-right: 0;
+      }
+      .navbar-brand {
+        margin: 0;
+      }
+      .logo {
+        width: 100%;
+        height: 45px;
+        @include medium {
+          height: auto;
+        }
+      }
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .main-menu {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-left: 0;
+        margin-bottom: 0;
+      }
+      .menu-item {
+        color: $textLightPrimaryColor;
+        position: relative;
+        padding: 36px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        text-shadow: 0 0 3px #341b14cc;
+        transition: $setTransition;
+        @include large {
+          padding: 30px 20px;
+          margin-right: 15px;
+        }
+        @include medium {
+          font-size: 16px;
+          padding: 20px 10px;
+          margin-right: 10px;
+        }
+        &:hover {
+          color: #fff;
+          text-shadow: 0px 0px 5px $primaryColor;
+          .material-icons {
+            color: $primaryColor;
+          }
+        }
+        &:first-child {
+          &:before {
+            display: none;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        &.router-link-exact-active {
+          cursor: default;
+          color: $primaryColor;
+          text-shadow: none;
+          pointer-events: none;
+          text-shadow: 0 0 3px #341b14cc;
+          cursor: default;
+          .material-icons {
+            color: $primaryColor;
+          }
+        }
+        .material-icons {
+          font-size: 18px;
+          color: $textLightPrimaryColor;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.page-header {
+  background: $textPrimaryColor;
+  padding: 200px 0 80px 0;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include small {
+    padding: 80px 0;
+  }
+  @include extraSmall {
+    padding: 80px 0;
+  }
+  &.bus-dynamics {
+    background-image: url('~@/assets/images/page-header-busDynamics-bg.jpg');
+  }
+  &.fare-query {
+    background-image: url('~@/assets/images/page-header-fareQuery-bg.jpg');
+  }
+  &.bus-faq {
+    background-image: url('~@/assets/images/page-header-busFaq-bg.jpg');
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: rgba(51, 51, 51, 0.59) url('~@/assets/images/dot-overlay.png');
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .bread {
+    text-align: center;
+    list-style: none;
+    font-weight: bold;
+    margin: 0px 0 5px 0;
+    padding: 0;
+    li {
+      display: inline-block;
+      margin: 0 0 0 0px;
+      color: $primaryColor;
+      font-size: 16px;
+      margin-right: 7px;
+      &:last-child {
+        margin-right: 0;
+      }
+      &.divider {
+        color: $primaryColor;
+      }
+      a {
+        color: $textLightPrimaryColor;
+      }
+    }
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1 {
+      text-align: center;
+      color: $textLightPrimaryColor;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-size: 46px;
+      font-family: 'Rubik', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      @include medium {
+        font-size: 42px;
+      }
+      @include small {
+        font-size: 32px;
+      }
+      @include extraSmall {
+        font-size: 28px;
+      }
+    }
+  }
+}

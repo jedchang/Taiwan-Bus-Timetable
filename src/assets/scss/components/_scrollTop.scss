@@ -1,0 +1,37 @@
+.scroll-top {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: -65px;
+  background-color: $tertiaryColor;
+  z-index: 100;
+  border-radius: 3px;
+  box-shadow: 1px 2px 6px 4px rgba(53, 57, 68, 0.2);
+  transition: $setTransition;
+  @include small {
+    display: none;
+  }
+  @include extraSmall {
+    display: none;
+  }
+  &:hover {
+    background-color: $primaryColor;
+    svg {
+      color: #fff;
+    }
+  }
+  &.show {
+    opacity: 1;
+    right: 44px;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
