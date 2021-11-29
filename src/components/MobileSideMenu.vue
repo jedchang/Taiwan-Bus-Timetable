@@ -15,7 +15,7 @@
               </span>
             </router-link>
             <router-link
-              to="/bus-dynamics"
+              to="/Bus-Dynamics"
               class="menu-item menu-bus-dynamics"
             >
               公車動態
@@ -24,7 +24,7 @@
               </span>
             </router-link>
             <router-link
-              to="/bus-faq"
+              to="/Bus-FAQ"
               class="menu-item menu-bus-faq"
             >
               常見問題

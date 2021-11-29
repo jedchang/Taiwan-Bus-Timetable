@@ -14,13 +14,13 @@ const routes = [
     meta: { title: '全台公車動態時刻查詢應用服務' }
   },
   {
-    path: '/bus-dynamics',
+    path: '/Bus-Dynamics',
     name: 'BusDynamics',
     component: BusDynamics,
     meta: { title: '公車動態 | 全台公車動態時刻查詢應用服務' }
   },
   {
-    path: '/bus-faq',
+    path: '/Bus-FAQ',
     name: 'BusFaq',
     component: BusFaq,
     meta: { title: '常見問題 | 全台公車動態時刻查詢應用服務' }

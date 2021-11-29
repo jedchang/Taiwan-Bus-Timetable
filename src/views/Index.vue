@@ -22,7 +22,7 @@
             <p>全台公車動態時刻查詢應用服務</p>
           </div>
           <router-link
-            to="/bus-dynamics"
+            to="/Bus-Dynamics"
             class="btn"
           >
             <span class="material-icons">
