@@ -24,6 +24,27 @@
     svg {
       color: #fff;
     }
+    &:after {
+      top: -34px;
+      opacity: 1;
+    }
+  }
+  &:after {
+    content: 'Scroll to Top';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 600;
+    width: 160%;
+    color: #fff;
+    border: 1px solid $primaryColor;
+    padding: 4px;
+    border-radius: 30px;
+    background-color: $primaryColor;
+    opacity: 0;
+    transition: $setTransition;
   }
   &.show {
     opacity: 1;

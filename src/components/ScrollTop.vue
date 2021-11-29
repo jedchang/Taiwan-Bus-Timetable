@@ -2,7 +2,6 @@
   <a
     href="#"
     class="scroll-top"
-    title="Scroll to Top"
     @click.prevent="scrollTop"
   >
     <img
