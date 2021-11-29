@@ -199,7 +199,7 @@
                               v-for="(fo, i) in filterOutwardStopsData"
                               :key="i"
                               class="item-row"
-                              @click="clickStops(fo)"
+                              @click="clickStops(fo.Stops)"
                             >
                               <div class="item-col stop-sequence">
                                 <div
@@ -299,6 +299,7 @@
                               v-for="(fr, i) in filterReturnStopsData"
                               :key="i"
                               class="item-row"
+                              @click="clickStops(fr.Stops)"
                             >
                               <div class="item-col stop-sequence">
                                 <div
@@ -551,7 +552,6 @@ export default {
         {
           attribution:
             '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          // maxZoom: 18,
           id: 'mapbox/streets-v11',
           tileSize: 512,
           zoomOffset: -1,
@@ -560,26 +560,26 @@ export default {
       ).addTo(this.map)
     },
     clickStops(item) {
-      console.log('clickStops item:', item)
       const popup = createPopup({
-        minWidth: 270,
+        minWidth: 220,
         className: 'leaflet-popup'
       })
-      const tempLongitude = item.Stops.StopPosition.PositionLon
-      const tempLatitude = item.Stops.StopPosition.PositionLat
+      const tempLongitude = item.StopPosition.PositionLon
+      const tempLatitude = item.StopPosition.PositionLat
       popup
-        .setLatLng([tempLongitude, tempLatitude])
+        .setLatLng([tempLatitude, tempLongitude])
         .setContent(this.popupContent(item))
       this.map.openPopup(popup)
-      this.map.panTo([tempLatitude, tempLongitude], 8)
-      this.map.setView([tempLatitude, tempLongitude], 17)
+      this.map.panTo([tempLatitude, tempLongitude], 18)
+      this.map.setView([tempLatitude, tempLongitude], 18)
     },
     popupContent(item) {
-      console.log('popupContent item:', item)
       return `
         <div class="station-popup">
-          <div class="sequence">${item.StopSequence}</div>
-          <h2>${item.StopName.Zh_tw}</h2>
+          <div class="info">
+            <div class="sequence">${item.StopSequence}</div>
+            <h2>${item.StopName.Zh_tw}</h2>
+          </div>
         </div>
       `
     },
@@ -602,7 +602,7 @@ export default {
         )
         this.map.addLayer(marker)
         const popup = createPopup({
-          minWidth: 270,
+          minWidth: 220,
           className: 'leaflet-popup'
         })
         popup.setContent(this.popupContent(item))
@@ -631,7 +631,10 @@ export default {
       if (this.myLayer) {
         this.removeExistingLayers()
       }
+      this.map.closePopup()
       this.getEstimatedTimeOfArrival()
+      this.clearCountDownUpdate(this.timeOutRefresh)
+      this.countDownUpdate()
       this.getGeometry()
     },
     clickUpdate() {
@@ -924,8 +927,11 @@ export default {
             return a.StopSequence - b.StopSequence
           })
           this.isLoading = false
-          this.map.addLayer(this.setMarkers(this.outwardStopsArray))
-          this.map.addLayer(this.setMarkers(this.returnStopsArray))
+          if (this.activeName === 'outward') {
+            this.map.addLayer(this.setMarkers(this.outwardStopsArray))
+          } else {
+            this.map.addLayer(this.setMarkers(this.returnStopsArray))
+          }
         })
         .catch(err => {
           console.log(err.response)
@@ -941,16 +947,12 @@ export default {
         .then(res => {
           if (this.currentWidth > 992) {
             window.scrollTo(0, 800)
-            console.log('> 992')
           } else if (this.currentWidth > 769 && this.currentWidth <= 991) {
             window.scrollTo(0, 690)
-            console.log('> 769 && <= 991')
           } else if (this.currentWidth > 577 && this.currentWidth <= 766) {
             window.scrollTo(0, 820)
-            console.log('> 577 && <= 766')
           } else if (this.currentWidth < 576) {
             window.scrollTo(0, 820)
-            console.log('< 576')
           }
           this.busStopOfRouteData = res.data
           if (this.timer !== 30) {
