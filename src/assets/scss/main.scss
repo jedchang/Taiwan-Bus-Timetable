@@ -1,16 +1,11 @@
 html {
   padding: 0;
   margin: 0;
-  // overflow: hidden; // 解決 el-dialog 出現後滾動至頂點
-  // height: 100%;
 }
 
 body {
   padding: 0;
   margin: 0;
-  // overflow: auto; // 解決 el-dialog 出現後滾動至頂點
-  // height: 100%;
-  // 為了讓手機選單不要滑動，需在 body 固定住，內頁選單才能依裝置高度置中
   &.fixed-menu {
     position: fixed;
     width: 100%;
@@ -20,7 +15,6 @@ body {
 
 #app {
   font-family: '微軟正黑體', sans-serif;
-  // font-family: 'Rubik', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -42,22 +36,11 @@ body {
     box-shadow: none !important;
   }
 
-  // loading
   .vld-overlay .vld-background {
     background-color: $textLightPrimaryColor;
     opacity: 1;
   }
 
-  // .vld-icon {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   flex-direction: column;
-  // }
-  // .vld-overlay {
-  //   overflow: hidden;
-  //   height: 100%;
-  // }
   .vld-overlay.is-full-page {
     z-index: 9999;
   }
@@ -78,7 +61,6 @@ body {
   padding: 80px 0;
 }
 
-// el-dialog 垂直置中
 .el-dialog {
   border-radius: 6px;
   overflow: hidden;
@@ -156,18 +138,10 @@ body {
   }
 }
 
-// 同一 tab 上無法點擊
-.el-tabs__item.is-active {
-  pointer-events: none;
-  cursor: default;
-}
-
-// custom element ui
 .el-select {
   width: 100%;
 }
 
-// 行動版下拉寬度
 .el-select-dropdown__wrap {
   @include extraSmall {
     max-width: 235px;
@@ -194,7 +168,15 @@ body {
     padding: 16px 12px;
   }
   &.is-active {
+    pointer-events: none;
+    cursor: default;
     color: $primaryColor;
+    span.label {
+      color: $primaryColor;
+    }
+    span.route {
+      color: $primaryColor;
+    }
   }
   &:hover {
     color: $primaryColor;
@@ -212,7 +194,7 @@ body {
   span.route {
     font-size: 20px;
     font-weight: bold;
-    color: $primaryColor;
+    color: $tertiaryColor;
     @include small {
       font-size: 18px;
     }

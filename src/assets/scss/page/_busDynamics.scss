@@ -810,28 +810,69 @@ section.map-content {
   @include small {
     position: relative;
     width: 100%;
-    height: 40px;
+    height: auto;
     top: 0;
     right: 0;
     border-radius: 0;
+    padding: 15px;
+    border-bottom: 1px solid $primaryColor;
+    &:hover {
+      .info {
+        color: $primaryColor;
+      }
+    }
   }
   @include extraSmall {
     position: relative;
     width: 100%;
-    height: 40px;
+    height: auto;
     top: 0;
     right: 0;
     border-radius: 0;
+    padding: 15px;
+    border-bottom: 1px solid $primaryColor;
+    &:hover {
+      .info {
+        color: $primaryColor;
+      }
+    }
   }
   &:hover {
-    background-color: $primaryColor;
+    background-color: $tertiaryColor;
     svg {
       color: #fff;
+    }
+    &:after {
+      top: -34px;
+      opacity: 1;
     }
   }
   &.show {
     opacity: 1;
     right: 35px;
+  }
+  &:after {
+    content: '手動更新';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 600;
+    width: 90%;
+    color: #fff;
+    border: 1px solid $tertiaryColor;
+    padding: 4px;
+    border-radius: 30px;
+    background-color: $tertiaryColor;
+    opacity: 0;
+    transition: $setTransition;
+    @include small {
+      content: none;
+    }
+    @include extraSmall {
+      content: none;
+    }
   }
 
   .info {
@@ -839,6 +880,8 @@ section.map-content {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    transition: $setTransition;
     @include small {
       flex-direction: row;
       height: 28px;
@@ -850,7 +893,6 @@ section.map-content {
       line-height: 28px;
     }
     .timer {
-      color: #fff;
       span {
         font-size: 14px;
         font-weight: 400;
@@ -876,15 +918,16 @@ section.map-content {
     }
     .txt {
       font-size: 14px;
-      color: #fff;
       margin-bottom: 3px;
       @include small {
+        font-size: 16px;
         margin-bottom: 0;
-        margin-right: 7px;
+        margin-right: 3px;
       }
       @include extraSmall {
+        font-size: 16px;
         margin-bottom: 0;
-        margin-right: 7px;
+        margin-right: 3px;
       }
     }
   }

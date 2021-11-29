@@ -101,7 +101,6 @@
                   </el-select>
                 </div>
               </section>
-
               <section class="route-content">
                 <div
                   v-if="routeName"
@@ -200,6 +199,7 @@
                               v-for="(fo, i) in filterOutwardStopsData"
                               :key="i"
                               class="item-row"
+                              @click="clickStops(fo)"
                             >
                               <div class="item-col stop-sequence">
                                 <div
@@ -419,9 +419,11 @@
         </div>
       </div>
     </div>
-    <div
+    <a
       v-if="busEstimatedTimeData.length > 0"
+      href="#"
       class="timer-item"
+      @click.prevent="clickUpdate"
     >
       <div class="info">
         <span class="txt">更新時間</span>
@@ -430,7 +432,7 @@
           <span>秒</span>
         </div>
       </div>
-    </div>
+    </a>
     <MobileScrollTop />
     <Footer />
     <ScrollTop />
@@ -460,6 +462,11 @@ const stopIcon = new L.icon({
   iconAnchor: [13, 0],
   popupAnchor: [1, 0]
 })
+
+const createPopup = function (options) {
+  const popup = L.popup(options)
+  return popup
+}
 
 const createMarker = function (coordinate, options = {}) {
   const marker = L.marker(coordinate, options)
@@ -544,12 +551,37 @@ export default {
         {
           attribution:
             '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          // maxZoom: 18,
           id: 'mapbox/streets-v11',
           tileSize: 512,
           zoomOffset: -1,
           accessToken: process.env.VUE_APP_ACCESSTOKEN
         }
       ).addTo(this.map)
+    },
+    clickStops(item) {
+      console.log('clickStops item:', item)
+      const popup = createPopup({
+        minWidth: 270,
+        className: 'leaflet-popup'
+      })
+      const tempLongitude = item.Stops.StopPosition.PositionLon
+      const tempLatitude = item.Stops.StopPosition.PositionLat
+      popup
+        .setLatLng([tempLongitude, tempLatitude])
+        .setContent(this.popupContent(item))
+      this.map.openPopup(popup)
+      this.map.panTo([tempLatitude, tempLongitude], 8)
+      this.map.setView([tempLatitude, tempLongitude], 17)
+    },
+    popupContent(item) {
+      console.log('popupContent item:', item)
+      return `
+        <div class="station-popup">
+          <div class="sequence">${item.StopSequence}</div>
+          <h2>${item.StopName.Zh_tw}</h2>
+        </div>
+      `
     },
     setMarkers(data) {
       const tempPosition = data.map(position => {
@@ -569,6 +601,12 @@ export default {
           { icon: stopIcon }
         )
         this.map.addLayer(marker)
+        const popup = createPopup({
+          minWidth: 270,
+          className: 'leaflet-popup'
+        })
+        popup.setContent(this.popupContent(item))
+        marker.bindPopup(popup)
       })
     },
     removeMarkers() {
@@ -596,12 +634,22 @@ export default {
       this.getEstimatedTimeOfArrival()
       this.getGeometry()
     },
+    clickUpdate() {
+      this.getEstimatedTimeOfArrival()
+      this.clearCountDownUpdate(this.timeOutRefresh)
+      this.countDownUpdate()
+      if (this.currentWidth > 577 && this.currentWidth <= 766) {
+        window.scrollTo(0, 820)
+      } else if (this.currentWidth < 576) {
+        window.scrollTo(0, 820)
+      }
+    },
     countDownUpdate() {
       this.timeOutRefresh = window.setInterval(() => {
         this.timer--
         if (this.timer < 0) {
-          this.clearCountDownUpdate(this.timeOutRefresh)
           this.getEstimatedTimeOfArrival()
+          this.clearCountDownUpdate(this.timeOutRefresh)
           this.countDownUpdate()
         }
       }, 1000)
@@ -635,8 +683,8 @@ export default {
           RouteName: item.RouteName.Zh_tw,
           DepartureStopNameZh: item.DepartureStopNameZh,
           DestinationStopNameZh: item.DestinationStopNameZh,
-          SubRoutes: item.SubRoutes, // SubRoutes:Array[2]
-          displayRouteName: `[${item.RouteName.Zh_tw}] ${item.DestinationStopNameZh} - ${item.DepartureStopNameZh}` // [0南] 捷運東門站 - 萬芳社區
+          SubRoutes: item.SubRoutes,
+          displayRouteName: `[${item.RouteName.Zh_tw}] ${item.DestinationStopNameZh} - ${item.DepartureStopNameZh}`
         })
       })
       this.setRouteStopNameData.sort(function (a, b) {
@@ -651,7 +699,7 @@ export default {
           DepartureStopNameZh: item.DepartureStopNameZh,
           DestinationStopNameZh: item.DestinationStopNameZh,
           SubRoutes: item.SubRoutes,
-          displayRouteName: `[${item.RouteName.Zh_tw}] ${item.DestinationStopNameZh} - ${item.DepartureStopNameZh}` // [0南] 捷運東門站 - 萬芳社區
+          displayRouteName: `[${item.RouteName.Zh_tw}] ${item.DestinationStopNameZh} - ${item.DepartureStopNameZh}`
         })
       })
       this.setSubRouteStopNameData.sort(function (a, b) {
@@ -733,6 +781,9 @@ export default {
       })
         .then(res => {
           const tempData = res.data
+          if (this.timer !== 30) {
+            this.clearCountDownUpdate(this.timeOutRefresh)
+          }
           this.routeData = tempData.filter(item => {
             return item.SubRoutes.length <= 2
           })
@@ -776,10 +827,7 @@ export default {
           this.outwardStopsArray = [].concat(...tempOutwardStops)
           this.returnStopsArray = [].concat(...tempReturnStops)
           if (this.outwardStopOfRouteData.length > 1) {
-            this.subRouteName =
-              this.outwardStopOfRouteData[
-                `${this.subRouteIndex}`
-              ].SubRouteName.Zh_tw
+            this.subRouteName = this.outwardStopOfRouteData[`${this.subRouteIndex}`].SubRouteName.Zh_tw
             this.outwardStopsArray =
               this.outwardStopOfRouteData[`${this.subRouteIndex}`].Stops
             tempOutwardEstimatedTime.forEach(estimatedTimeItem => {
@@ -875,9 +923,9 @@ export default {
           this.filterReturnStopsData.sort(function (a, b) {
             return a.StopSequence - b.StopSequence
           })
+          this.isLoading = false
           this.map.addLayer(this.setMarkers(this.outwardStopsArray))
           this.map.addLayer(this.setMarkers(this.returnStopsArray))
-          this.isLoading = false
         })
         .catch(err => {
           console.log(err.response)
@@ -905,6 +953,10 @@ export default {
             console.log('< 576')
           }
           this.busStopOfRouteData = res.data
+          if (this.timer !== 30) {
+            this.clearCountDownUpdate(this.timeOutRefresh)
+          }
+          this.countDownUpdate()
           if (this.busStopOfRouteData.length > 0) {
             this.filterOutwardStopsData = []
             this.filterReturnStopsData = []
