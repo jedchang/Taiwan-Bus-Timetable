@@ -368,80 +368,58 @@ section.map-content {
   }
   .btn-map-toggle {
     display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 30px;
+    color: $tertiaryColor;
+    background-color: #fff;
+    border: 1px solid $tertiaryColor;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+    transition: $setTransition;
+    &:hover {
+      color: #fff;
+      background-color: $primaryColor;
+      border: 1px solid $primaryColor;
+      cursor: pointer;
+    }
+    .material-icons {
+      margin-right: 3px;
+    }
     @include large {
-      display: inline-block;
-      padding: 12px 20px;
-      border: 1px solid $tertiaryColor;
-      color: $tertiaryColor;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
-      background-color: #fff;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 20;
-      transition: $setTransition;
-      &:hover {
-        color: #fff;
-        background-color: $primaryColor;
-        border: 1px solid $primaryColor;
-        cursor: pointer;
-      }
+      display: flex;
     }
     @include medium {
-      display: inline-block;
-      padding: 12px 20px;
-      border: 1px solid $tertiaryColor;
-      color: $tertiaryColor;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
-      background-color: #fff;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 20;
-      transition: $setTransition;
+      display: flex;
+    }
+    @include small {
+      display: flex;
       &:hover {
-        color: #fff;
-        background-color: $primaryColor;
-        border: 1px solid $primaryColor;
+        color: $tertiaryColor;
+        background-color: #fff;
+        border: 1px solid $tertiaryColor;
         cursor: pointer;
       }
     }
-    @include small {
-      display: inline-block;
-      padding: 12px 20px;
-      border: 1px solid $tertiaryColor;
-      color: $tertiaryColor;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
-      background-color: #fff;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 20;
-      transition: $setTransition;
-    }
     @include extraSmall {
-      display: inline-block;
-      padding: 15px 20px;
-      border: 1px solid $tertiaryColor;
-      color: $tertiaryColor;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
-      background-color: #fff;
-      position: absolute;
+      display: flex;
       top: 20px;
       right: 0;
       left: 50%;
       transform: translateX(-50%);
       z-index: 20;
       width: 90%;
-      transition: $setTransition;
+      &:hover {
+        color: $tertiaryColor;
+        background-color: #fff;
+        border: 1px solid $tertiaryColor;
+        cursor: pointer;
+      }
     }
   }
   #map {

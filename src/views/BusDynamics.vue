@@ -226,7 +226,10 @@
                       class="btn-map-toggle"
                       @click.prevent="mapToggle"
                     >
-                      顯示地圖
+                      <span class="material-icons">
+                        visibility_off
+                      </span>
+                      地圖
                     </a>
                     <a
                       v-if="!isMapToggle"
@@ -234,7 +237,10 @@
                       class="btn-map-toggle"
                       @click.prevent="mapToggle"
                     >
-                      關閉地圖
+                      <span class="material-icons">
+                        visibility
+                      </span>
+                      地圖
                     </a>
                     <div id="map" />
                   </section>
