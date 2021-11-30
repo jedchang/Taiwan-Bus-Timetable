@@ -7,10 +7,10 @@
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-100%); 
+  transform: translateX(-100%);
   background: $tertiaryColor;
   box-shadow: none;
-  z-index: 2001;
+  z-index: 9001;
   transition: opacity 0.3s, visibility 0.3s,
     transform 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   &.open {
@@ -57,9 +57,6 @@
       text-align: left;
       margin-bottom: 20px;
       transition: $setTransition;
-      &:hover {
-        background-color: lighten($tertiaryColor, 10%);
-      }
       &:last-child {
         border-bottom: none;
       }
@@ -72,7 +69,7 @@
         cursor: default;
       }
       @include extraSmall {
-        font-size: 5.8vmin;
+        font-size: 22px;
       }
     }
   }

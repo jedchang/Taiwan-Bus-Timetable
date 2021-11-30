@@ -179,95 +179,13 @@
                             {{ destinationStopNameZh }}
                           </span>
                         </span>
-                        <div class="list outward-list">
-                          <div class="item-thead">
-                            <div class="item-col stop-sequence">
-                              站序
-                            </div>
-                            <div class="item-col stop-status">
-                              預估到站
-                            </div>
-                            <div class="item-col stop-name">
-                              站名
-                            </div>
-                          </div>
-                          <div
-                            v-if="cityName !== '' && routeName !== ''"
-                            class="item-tbody"
-                          >
-                            <div
-                              v-for="(fo, i) in filterOutwardStopsData"
-                              :key="i"
-                              class="item-row"
-                              @click="clickStops(fo.Stops)"
-                            >
-                              <div class="item-col stop-sequence">
-                                <div
-                                  v-if="
-                                    fo.StopStatus === 0 && fo.EstimateTime <= 1
-                                  "
-                                  class="number number-enter"
-                                >
-                                  {{ fo.StopSequence }}
-                                  <span class="round" />
-                                </div>
-                                <div
-                                  v-else
-                                  class="number"
-                                >
-                                  {{ fo.StopSequence }}
-                                  <span class="round" />
-                                </div>
-                              </div>
-                              <div class="item-col stop-status">
-                                <div
-                                  v-if="
-                                    fo.StopStatus === 0 && fo.EstimateTime > 1
-                                  "
-                                  class="status status-0"
-                                >
-                                  {{ fo.EstimateTime }} 分鐘
-                                </div>
-                                <div
-                                  v-else-if="
-                                    fo.StopStatus === 0 && fo.EstimateTime <= 1
-                                  "
-                                  class="status status-0 status-enter"
-                                >
-                                  進站中
-                                </div>
-                                <div
-                                  v-else-if="fo.StopStatus === 1"
-                                  class="status status-1"
-                                >
-                                  尚未發車
-                                </div>
-                                <div
-                                  v-else-if="fo.StopStatus === 2"
-                                  class="status status-2"
-                                >
-                                  交管不停靠
-                                </div>
-                                <div
-                                  v-else-if="fo.StopStatus === 3"
-                                  class="status status-3"
-                                >
-                                  末班車已過
-                                </div>
-                                <div
-                                  v-else-if="fo.StopStatus === 4"
-                                  class="status status-4"
-                                >
-                                  今日未營運
-                                </div>
-                              </div>
-                              <div class="item-col stop-name">
-                                {{ fo.StopNameZh }}
-                              </div>
-                              {{ fo.VehicleStopStatus }}
-                            </div>
-                          </div>
-                        </div>
+                        <OutwardList
+                          :map="map"
+                          :city-name="cityName"
+                          :route-name="routeName"
+                          :filter-outward-stops-data="filterOutwardStopsData"
+                          @updateClickStops="clickStops"
+                        />
                       </el-tab-pane>
                       <el-tab-pane name="return">
                         <span
@@ -279,108 +197,13 @@
                             {{ departureStopNameZh }}
                           </span>
                         </span>
-                        <div class="list return-list">
-                          <div class="item-thead">
-                            <div class="item-col stop-sequence">
-                              站序
-                            </div>
-                            <div class="item-col stop-status">
-                              預估到站
-                            </div>
-                            <div class="item-col stop-name">
-                              站名
-                            </div>
-                          </div>
-                          <div
-                            v-if="cityName !== '' && routeName !== ''"
-                            class="item-tbody"
-                          >
-                            <div
-                              v-for="(fr, i) in filterReturnStopsData"
-                              :key="i"
-                              class="item-row"
-                              @click="clickStops(fr.Stops)"
-                            >
-                              <div class="item-col stop-sequence">
-                                <div
-                                  v-if="
-                                    fr.StopStatus === 0 && fr.EstimateTime <= 1
-                                  "
-                                  class="number number-enter"
-                                >
-                                  {{ fr.StopSequence }}
-                                  <span class="round" />
-                                </div>
-                                <div
-                                  v-else
-                                  class="number"
-                                >
-                                  {{ fr.StopSequence }}
-                                  <span class="round" />
-                                </div>
-                              </div>
-                              <div class="item-col stop-status">
-                                <div
-                                  v-if="
-                                    fr.StopStatus === 0 && fr.EstimateTime > 1
-                                  "
-                                  class="status status-0"
-                                >
-                                  {{ fr.EstimateTime }} 分鐘
-                                </div>
-                                <div
-                                  v-else-if="
-                                    fr.StopStatus === 0 && fr.EstimateTime <= 1
-                                  "
-                                  class="status status-0 status-enter"
-                                >
-                                  進站中
-                                </div>
-                                <div
-                                  v-else-if="fr.StopStatus === 1"
-                                  class="status status-1"
-                                >
-                                  尚未發車
-                                </div>
-                                <div
-                                  v-else-if="fr.StopStatus === 2"
-                                  class="status status-2"
-                                >
-                                  交管不停靠
-                                </div>
-                                <div
-                                  v-else-if="fr.StopStatus === 3"
-                                  class="status status-3"
-                                >
-                                  末班車已過
-                                </div>
-                                <div
-                                  v-else-if="fr.StopStatus === 4"
-                                  class="status status-4"
-                                >
-                                  今日未營運
-                                </div>
-                              </div>
-                              <div class="item-col stop-name">
-                                {{ fr.StopNameZh }}
-                              </div>
-                              {{ fr.VehicleStopStatus }}
-                            </div>
-                          </div>
-                          <div
-                            v-else
-                            class="item-tbody"
-                            :class="{
-                              hidden: cityName === '' && routeName === ''
-                            }"
-                          >
-                            <div class="item-row">
-                              <div class="item-col">
-                                無返程資料
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <ReturnList
+                          :map="map"
+                          :city-name="cityName"
+                          :route-name="routeName"
+                          :filter-return-stops-data="filterReturnStopsData"
+                          @updateClickStops="clickStops"
+                        />
                       </el-tab-pane>
                     </el-tabs>
                     <div
@@ -397,20 +220,22 @@
                     </div>
                   </section>
                   <section class="map-content">
-                    <div
+                    <a
                       v-if="isMapToggle"
+                      href="#"
                       class="btn-map-toggle"
-                      @click="mapToggle"
+                      @click.prevent="mapToggle"
                     >
                       顯示地圖
-                    </div>
-                    <div
+                    </a>
+                    <a
                       v-if="!isMapToggle"
+                      href="#"
                       class="btn-map-toggle"
-                      @click="mapToggle"
+                      @click.prevent="mapToggle"
                     >
                       關閉地圖
-                    </div>
+                    </a>
                     <div id="map" />
                   </section>
                 </div>
@@ -450,6 +275,8 @@ import Navbar from '@/components/Navbar'
 import MobileNavbar from '@/components/MobileNavbar'
 import MobileSideMenu from '@/components/MobileSideMenu'
 import PageHeader from '@/components/PageHeader'
+import OutwardList from '@/components/OutwardList'
+import ReturnList from '@/components/ReturnList'
 import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
 import MobileScrollTop from '@/components/MobileScrollTop'
@@ -482,6 +309,8 @@ export default {
     MobileNavbar,
     MobileSideMenu,
     PageHeader,
+    OutwardList,
+    ReturnList,
     Footer,
     ScrollTop,
     MobileScrollTop
@@ -769,6 +598,7 @@ export default {
         this.setAllRouteStopNameData = []
         this.busEstimatedTimeData = []
         this.removeMarkers()
+        this.map.closePopup()
         this.activeName = 'outward'
       }
       if (this.myLayer) {
@@ -963,6 +793,7 @@ export default {
             this.filterOutwardStopsData = []
             this.filterReturnStopsData = []
             this.removeMarkers()
+            this.map.closePopup()
             this.activeName = 'outward'
           }
           const matchStopOfRoute = this.busStopOfRouteData.filter(item => {

@@ -424,12 +424,6 @@ section.map-content {
       right: 20px;
       z-index: 20;
       transition: $setTransition;
-      &:hover {
-        color: #fff;
-        background-color: $primaryColor;
-        border: 1px solid $primaryColor;
-        cursor: pointer;
-      }
     }
     @include extraSmall {
       display: inline-block;
@@ -448,12 +442,6 @@ section.map-content {
       z-index: 20;
       width: 90%;
       transition: $setTransition;
-      &:hover {
-        color: #fff;
-        background-color: $primaryColor;
-        border: 1px solid $primaryColor;
-        cursor: pointer;
-      }
     }
   }
   #map {
@@ -478,245 +466,6 @@ section.map-content {
       margin-top: 0;
       height: 300px;
       margin-top: 100px;
-    }
-  }
-}
-
-.list {
-  padding: 20px 20px;
-  @include large {
-    padding: 0;
-  }
-  @include medium {
-    padding: 0;
-  }
-  @include small {
-    padding: 0;
-  }
-  @include extraSmall {
-    padding: 0;
-  }
-  .item-thead {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    background-color: $secondaryColor;
-    color: #fff;
-    padding: 15px 25px;
-    @include small {
-      padding: 15px 10px;
-    }
-    @include extraSmall {
-      padding: 15px 10px;
-    }
-  }
-  .item-tbody {
-    height: calc(600px - 48px);
-    overflow-y: scroll;
-    &.hidden {
-      height: auto;
-      overflow-y: hidden;
-    }
-
-    .item-col {
-      &.stop-sequence {
-        font-size: 14px;
-        @include small {
-          font-size: 14px;
-        }
-        @include extraSmall {
-          font-size: 12px;
-        }
-      }
-      &.stop-name {
-        font-weight: 600;
-      }
-    }
-  }
-  .item-col {
-    text-align: center;
-    font-size: 16px;
-    @include small {
-      font-size: 14px;
-    }
-    @include extraSmall {
-      font-size: 12px;
-    }
-    &.stop-sequence {
-      flex-basis: 10%;
-      @include small {
-        flex-basis: 15%;
-      }
-      @include extraSmall {
-        flex-basis: 15%;
-      }
-    }
-    &.stop-status {
-      flex-basis: 35%;
-    }
-    &.stop-name {
-      flex-basis: 55%;
-      @include small {
-        flex-basis: 50%;
-      }
-      @include extraSmall {
-        flex-basis: 50%;
-      }
-    }
-  }
-  .item-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    padding: 25px;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    margin-top: -1px;
-    color: #707070;
-    transition: $setTransition;
-    @include small {
-      padding: 15px 10px;
-    }
-    @include extraSmall {
-      padding: 15px 10px;
-    }
-    &:hover {
-      cursor: pointer;
-      background-color: #f3f3f3;
-    }
-    &:last-child {
-      border-bottom: none;
-      .number {
-        &:before {
-          content: none;
-        }
-      }
-    }
-
-    .status {
-      padding: 10px;
-      width: 80%;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 14px;
-      @include small {
-        width: 90%;
-        font-size: 14px;
-      }
-      @include extraSmall {
-        width: 90%;
-        font-size: 12px;
-      }
-      &.status-0 {
-        color: #12a353;
-        background-color: #d8ede1;
-        &.status-enter {
-          color: #f72900;
-          background-color: #ffd8d0;
-        }
-      }
-      &.status-1 {
-        color: #876300;
-        background-color: #f3e3c1;
-      }
-      &.status-2 {
-        color: #0068ad;
-        background-color: #c3def0;
-      }
-      &.status-3 {
-        color: #c403eb;
-        background-color: #d0b1d6;
-      }
-      &.status-4 {
-        color: #3b3b3b;
-        background-color: #bbbbbb;
-      }
-    }
-    .number {
-      color: #fff;
-      position: relative;
-      z-index: 1;
-      font-family: 'Rubik', Helvetica, Arial, sans-serif;
-      .round {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 4px;
-        margin: 0 auto;
-        color: #fff;
-        background-color: #9e9e9e;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        z-index: -1;
-        @include small {
-          width: 30px;
-          height: 30px;
-        }
-        @include extraSmall {
-          width: 30px;
-          height: 30px;
-        }
-      }
-      &.number-enter {
-        .round {
-          background-color: #ff5e14;
-          &:before {
-            content: '';
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            animation: round-pulse 1.2s infinite;
-            animation-delay: 1.2s;
-            @include small {
-              width: 30px;
-              height: 30px;
-            }
-            @include extraSmall {
-              width: 30px;
-              height: 30px;
-            }
-          }
-          &:after {
-            content: '';
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            animation: round-pulse 1.2s infinite;
-            @include small {
-              width: 30px;
-              height: 30px;
-            }
-            @include extraSmall {
-              width: 30px;
-              height: 30px;
-            }
-          }
-        }
-      }
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 3px;
-        height: 100px;
-        background-color: #9e9e9e;
-        z-index: -1;
-      }
     }
   }
 }
@@ -808,6 +557,16 @@ section.map-content {
   border-radius: 50%;
   box-shadow: 1px 2px 6px 4px rgba(53, 57, 68, 0.2);
   transition: $setTransition;
+  &:hover {
+    background-color: $tertiaryColor;
+    svg {
+      color: #fff;
+    }
+    &:after {
+      top: -34px;
+      opacity: 1;
+    }
+  }
   @include small {
     position: relative;
     width: 100%;
@@ -818,9 +577,7 @@ section.map-content {
     padding: 15px;
     border-bottom: 1px solid $primaryColor;
     &:hover {
-      .info {
-        color: $primaryColor;
-      }
+      background-color: $primaryColor;
     }
   }
   @include extraSmall {
@@ -833,19 +590,7 @@ section.map-content {
     padding: 15px;
     border-bottom: 1px solid $primaryColor;
     &:hover {
-      .info {
-        color: $primaryColor;
-      }
-    }
-  }
-  &:hover {
-    background-color: $tertiaryColor;
-    svg {
-      color: #fff;
-    }
-    &:after {
-      top: -34px;
-      opacity: 1;
+      background-color: $primaryColor;
     }
   }
   &.show {

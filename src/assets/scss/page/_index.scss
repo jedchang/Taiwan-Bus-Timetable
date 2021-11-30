@@ -112,18 +112,26 @@
         font-size: 18px;
         letter-spacing: 1px;
         font-weight: bold;
-        @include small {
-          width: 200px;
-          padding: 15px 30px;
-        }
-        @include extraSmall {
-          width: 90%;
-          padding: 15px 20px;
-        }
         &:hover {
           color: $primaryColor;
           background-color: #fff;
           font-weight: 500;
+        }
+        @include small {
+          width: 200px;
+          padding: 15px 30px;
+          &:hover {
+            color: #fff;
+            background-color: $primaryColor;
+          }
+        }
+        @include extraSmall {
+          width: 90%;
+          padding: 15px 20px;
+          &:hover {
+            color: #fff;
+            background-color: $primaryColor;
+          }
         }
         .material-icons {
           margin-right: 5px;
