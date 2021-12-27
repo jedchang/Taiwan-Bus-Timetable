@@ -23,6 +23,7 @@ https://jedchang.github.io/Taiwan-Bus-Timetable/
 - Axios
 - Leaflet
 - MarkerCluster
+- GestureHandling
 - Element-ui
 - jsSHA
 - Wicket
@@ -36,6 +37,7 @@ https://jedchang.github.io/Taiwan-Bus-Timetable/
 - [x] 公車站序公車
 - [x] 公車地圖模式
 - [x] RWD 版面樣式
+- [x] 手勢觸控滾動
 
 ## Remark
 

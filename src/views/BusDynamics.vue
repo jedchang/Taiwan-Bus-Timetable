@@ -275,6 +275,8 @@
 // @ is an alias to /src
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
+import { GestureHandling } from 'leaflet-gesture-handling'
 import { antPath } from 'leaflet-ant-path'
 import LoadingSvg from '@/components/LoadingSvg'
 import Navbar from '@/components/Navbar'
@@ -363,7 +365,8 @@ export default {
       mapOptions: {
         center: [23.92275, 120.98979],
         zoom: 8,
-        zoomControl: true
+        zoomControl: true,
+        gestureHandling: true
       }
     }
   },
@@ -378,6 +381,7 @@ export default {
   },
   methods: {
     initMap() {
+      L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
       this.map = new L.map('map', this.mapOptions).setView(
         this.mapOptions.center,
         this.mapOptions.zoom
