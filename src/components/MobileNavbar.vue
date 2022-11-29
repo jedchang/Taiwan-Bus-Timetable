@@ -1,5 +1,4 @@
 <template>
-  <!-- Mobile -->
   <div
     id="mobile-navbar"
     class="mobile-navbar navbar"

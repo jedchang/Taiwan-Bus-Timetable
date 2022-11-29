@@ -40,7 +40,6 @@
           </div>
         </div>
         <div class="item-col stop-status">
-          <!-- 一分鐘內表示進站中 -->
           <div
             v-if="
               fr.StopStatus === 0 && fr.EstimateTime > 1
@@ -88,7 +87,6 @@
         {{ fr.VehicleStopStatus }}
       </div>
     </div>
-    <!-- 若無資料，捲軸高度隱藏 -->
     <div
       v-else
       class="item-tbody"
@@ -105,7 +103,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: 'ReturnList',
   props: {

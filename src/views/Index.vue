@@ -1,9 +1,7 @@
 <template>
   <div class="wrapper index">
     <div class="vld-parent">
-      <loading
-        :active.sync="isLoading"
-      >
+      <loading :active.sync="isLoading">
         <template slot="default">
           <LoadingSvg />
         </template>

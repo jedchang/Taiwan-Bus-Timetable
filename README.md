@@ -1,7 +1,7 @@
 # Taiwan Bus Timetable
 
 全台公車動態時刻查詢應用服務
-![](https://images2.imgbox.com/fa/1d/EhevZx62_o.jpg)
+![](https://images2.imgbox.com/b5/9c/Hii9sko0_o.jpg)
 
 ## Demo
 
@@ -38,6 +38,7 @@ https://jedchang.github.io/Taiwan-Bus-Timetable/
 - [x] 公車地圖模式
 - [x] RWD 版面樣式
 - [x] 手勢觸控滾動
+- [ ] 票價查詢
 
 ## Remark
 

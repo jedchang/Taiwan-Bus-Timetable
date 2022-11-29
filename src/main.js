@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import qs from 'qs'
 import {
   Tabs,
   TabPane,
@@ -34,6 +35,8 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Dialog)
 Vue.use(Button)
+
+Vue.prototype.$qs = qs
 
 new Vue({
   router,

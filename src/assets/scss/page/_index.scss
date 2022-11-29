@@ -123,6 +123,7 @@
           &:hover {
             color: #fff;
             background-color: $primaryColor;
+            font-weight: 600;
           }
         }
         @include extraSmall {
@@ -131,6 +132,7 @@
           &:hover {
             color: #fff;
             background-color: $primaryColor;
+            font-weight: 600;
           }
         }
         .material-icons {
@@ -166,21 +168,11 @@
   }
 
   .page-content {
-    margin-top: 250px; // 公車 bg bottom: -250px;
+    margin-top: 250px;
     @include extraSmall {
       margin-top: 150px;
     }
   }
-
-  // .full-bg {
-  //   padding: 150px 0 70px 0;
-  //   height: 250px;
-  //   background: #ff7623;
-  //   @include extraSmall {
-  //     padding: 50px 0;
-  //     height: 200px;
-  //   }
-  // }
 
   section.service {
     padding: 30px 0 120px;

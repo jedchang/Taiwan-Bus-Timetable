@@ -21,7 +21,7 @@ svg.loader {
     stroke: $textPrimaryColor;
     fill: $textPrimaryColor;
     &.front-wheel {
-      transform-origin: 473.8px 399.6px; 
+      transform-origin: 473.8px 399.6px;
       animation: wheel 300ms linear infinite;
       animation-delay: 200ms;
     }

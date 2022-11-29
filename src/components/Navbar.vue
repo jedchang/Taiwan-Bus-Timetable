@@ -1,5 +1,4 @@
 <template>
-  <!-- Desktop -->
   <div
     id="desktop-navbar"
     class="desktop-navbar navbar"
@@ -60,13 +59,12 @@
 <script>
 export default {
   name: 'Navbar',
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
   mounted() {
     const desktopNavbar = document.querySelector('#desktop-navbar')
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       if (window.scrollY > desktopNavbar.offsetTop) {
         desktopNavbar.classList.add('sticky-navbar')
       } else {

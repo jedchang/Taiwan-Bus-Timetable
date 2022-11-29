@@ -3,6 +3,7 @@
     class="page-header"
     :class="{
       'bus-dynamics': titleNameEn === 'Bus Dynamics',
+      'fare-query': titleNameEn === 'Fare Query',
       'bus-faq': titleNameEn === 'Bus FAQ'
     }"
   >

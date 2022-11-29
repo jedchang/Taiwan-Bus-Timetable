@@ -1,6 +1,5 @@
 <template>
   <div class="mobile-side-menu">
-    <!-- Main panel -->
     <div class="menu-panel">
       <div class="container">
         <div class="menu-wrapper">
@@ -45,8 +44,7 @@ import resetAttr from '@/utils/resetAttr.js'
 export default {
   name: 'MobileSideMenu',
   data() {
-    return {
-    }
+    return {}
   },
   mounted() {
     this.resetAttr()

@@ -27,15 +27,13 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/' // 輸入不存在路由，重新導頁,
+    redirect: '/'
   }
 ]
 
 const router = new VueRouter({
-  // GitHub Pages 無法使用 mode: 'history'
   // mode: 'history',
   routes,
-  // router 切換頁面滾到頂部
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -46,7 +44,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // 修改頁面 title
   window.document.title = to.meta.title
   next()
 })

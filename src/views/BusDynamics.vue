@@ -289,7 +289,6 @@ import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
 import MobileScrollTop from '@/components/MobileScrollTop'
 import city from '../utils/city.json'
-import jsSHA from 'jssha'
 import Wkt from 'wicket'
 
 const stopIcon = new L.icon({
@@ -360,7 +359,7 @@ export default {
       geojsonFeature: null,
       subRouteIndex: 0,
       timeOutRefresh: '',
-      timer: 30,
+      timer: 100,
       map: null,
       mapOptions: {
         center: [23.92275, 120.98979],
@@ -377,6 +376,7 @@ export default {
     }, 1200)
   },
   mounted() {
+    this.getAuthorizationHeader()
     this.initMap()
   },
   methods: {
@@ -470,6 +470,7 @@ export default {
       if (this.myLayer) {
         this.removeExistingLayers()
       }
+      this.removeMarkers()
       this.map.closePopup()
       this.getEstimatedTimeOfArrival()
       this.clearCountDownUpdate(this.timeOutRefresh)
@@ -583,8 +584,7 @@ export default {
       this.isLoading = true
       this.axios({
         methods: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Bus/Shape/City/${this.cityName}/${this.routeName}?$format=JSON`,
-        headers: this.getAuthorizationHeader()
+        url: `https://tdx.transportdata.tw/api/basic/v2/Bus/Shape/City/${this.cityName}/${this.routeName}?$format=JSON`
       })
         .then(res => {
           this.busGeometryData = []
@@ -619,8 +619,7 @@ export default {
       }
       this.axios({
         methods: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/${this.cityName}?$format=JSON`,
-        headers: this.getAuthorizationHeader()
+        url: `https://tdx.transportdata.tw/api/basic/v2/Bus/Route/City/${this.cityName}?$format=JSON`
       })
         .then(res => {
           const tempData = res.data
@@ -649,8 +648,7 @@ export default {
       }
       this.axios({
         methods: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/${this.cityName}/${this.routeName}?$format=JSON`,
-        headers: this.getAuthorizationHeader()
+        url: `https://tdx.transportdata.tw/api/basic/v2/Bus/EstimatedTimeOfArrival/City/${this.cityName}/${this.routeName}?$format=JSON`
       })
         .then(res => {
           this.setRouteStopName()
@@ -669,8 +667,12 @@ export default {
           })
           this.outwardStopsArray = [].concat(...tempOutwardStops)
           this.returnStopsArray = [].concat(...tempReturnStops)
+
           if (this.outwardStopOfRouteData.length > 1) {
-            this.subRouteName = this.outwardStopOfRouteData[`${this.subRouteIndex}`].SubRouteName.Zh_tw
+            this.subRouteName =
+              this.outwardStopOfRouteData[
+                `${this.subRouteIndex}`
+              ].SubRouteName.Zh_tw
             this.outwardStopsArray =
               this.outwardStopOfRouteData[`${this.subRouteIndex}`].Stops
             tempOutwardEstimatedTime.forEach(estimatedTimeItem => {
@@ -768,21 +770,20 @@ export default {
           })
           this.isLoading = false
           if (this.activeName === 'outward') {
-            this.map.addLayer(this.setMarkers(this.outwardStopsArray))
+            this.setMarkers(this.outwardStopsArray)
           } else {
-            this.map.addLayer(this.setMarkers(this.returnStopsArray))
+            this.setMarkers(this.returnStopsArray)
           }
         })
         .catch(err => {
-          console.log(err.response)
+          console.log('err.response:', err.response)
         })
     },
     getStopOfRoute() {
       this.isLoading = true
       this.axios({
         methods: 'get',
-        url: `https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/${this.cityName}/${this.routeName}?$format=JSON`,
-        headers: this.getAuthorizationHeader()
+        url: `https://tdx.transportdata.tw/api/basic/v2/Bus/StopOfRoute/City/${this.cityName}/${this.routeName}?$format=JSON`
       })
         .then(res => {
           if (this.currentWidth > 992) {
@@ -826,20 +827,26 @@ export default {
         })
     },
     getAuthorizationHeader() {
-      const AppID = process.env.VUE_APP_APPID
-      const AppKey = process.env.VUE_APP_APPKEY
-      const GMTString = new Date().toGMTString()
-      const ShaObj = new jsSHA('SHA-1', 'TEXT')
-      ShaObj.setHMACKey(AppKey, 'TEXT')
-      ShaObj.update('x-date: ' + GMTString)
-      const HMAC = ShaObj.getHMAC('B64')
-      const Authorization =
-        'hmac username="' +
-        AppID +
-        '", algorithm="hmac-sha1", headers="x-date", signature="' +
-        HMAC +
-        '"'
-      return { Authorization: Authorization, 'X-Date': GMTString }
+      const parameter = {
+        grant_type: 'client_credentials',
+        client_id: process.env.VUE_APP_CLIENTID,
+        client_secret: process.env.VUE_APP_CLIENTSECRET
+      }
+      this.axios({
+        method: 'POST',
+        url: process.env.VUE_APP_AUTHURL,
+        dataType: 'JSON',
+        data: this.$qs.stringify(parameter),
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          this.axios.defaults.headers.common.Authorization = `Bearer ${res.data.access_token}`
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
