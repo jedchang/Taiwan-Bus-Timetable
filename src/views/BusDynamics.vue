@@ -70,6 +70,7 @@
                     v-model="cityName"
                     placeholder="例如：臺北市"
                     @change="getRouteName"
+                    @visible-change="selectVisibleChange($event)"
                   >
                     <el-option
                       v-for="(c, i) in cityData"
@@ -91,6 +92,7 @@
                     no-data-text="請先選擇縣市"
                     no-match-text="沒有資料符合"
                     @change="getStopOfRoute"
+                    @visible-change="selectVisibleChange($event)"
                   >
                     <el-option
                       v-for="s in setAllRouteStopNameData"
@@ -253,14 +255,15 @@
     </div>
     <a
       v-if="busEstimatedTimeData.length > 0"
-      href="#"
+      href="javascript:;"
       class="timer-item"
+      :class="{active : timeStatus === 'Running'}"
       @click.prevent="clickUpdate"
     >
       <div class="info">
         <span class="txt">更新時間</span>
-        <div class="timer">
-          <span class="number"> {{ timer }} </span>
+        <div class="time">
+          <span class="number"> {{ time }} </span>
           <span>秒</span>
         </div>
       </div>
@@ -272,7 +275,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
@@ -358,14 +360,24 @@ export default {
       busGeometryData: [],
       geojsonFeature: null,
       subRouteIndex: 0,
-      timeOutRefresh: '',
-      timer: 100,
+      timer: null,
+      time: 30,
+      timeStatus: 'Stopped',
       map: null,
       mapOptions: {
         center: [23.92275, 120.98979],
         zoom: 8,
         zoomControl: true,
         gestureHandling: true
+      }
+    }
+  },
+  watch: {
+    time(newVal) {
+      if (newVal === -1) {
+        this.updateEstimatedTimeOfArrival()
+        this.clearCountDownUpdate()
+        this.startCountDown()
       }
     }
   },
@@ -378,6 +390,9 @@ export default {
   mounted() {
     this.getAuthorizationHeader()
     this.initMap()
+  },
+  beforeDestroy() {
+    window.clearInterval(this.timer)
   },
   methods: {
     initMap() {
@@ -472,35 +487,46 @@ export default {
       }
       this.removeMarkers()
       this.map.closePopup()
-      this.getEstimatedTimeOfArrival()
-      this.clearCountDownUpdate(this.timeOutRefresh)
-      this.countDownUpdate()
+      this.updateEstimatedTimeOfArrival()
+      this.clearCountDownUpdate()
+      this.startCountDown()
       this.getGeometry()
     },
     clickUpdate() {
-      this.getEstimatedTimeOfArrival()
-      this.clearCountDownUpdate(this.timeOutRefresh)
-      this.countDownUpdate()
+      this.updateEstimatedTimeOfArrival()
+      this.clearCountDownUpdate()
+      this.startCountDown()
       if (this.currentWidth > 577 && this.currentWidth <= 766) {
         window.scrollTo(0, 820)
       } else if (this.currentWidth < 576) {
         window.scrollTo(0, 820)
       }
     },
-    countDownUpdate() {
-      this.timeOutRefresh = window.setInterval(() => {
-        this.timer--
-        if (this.timer < 0) {
-          this.getEstimatedTimeOfArrival()
-          this.clearCountDownUpdate(this.timeOutRefresh)
-          this.countDownUpdate()
-        }
+    updateEstimatedTimeOfArrival() {
+      this.getEstimatedTimeOfArrival()
+    },
+    selectVisibleChange(callback) {
+      if (callback) {
+        this.pauseCountDown()
+      } else {
+        this.startCountDown()
+      }
+    },
+    startCountDown() {
+      window.clearInterval(this.timer)
+      this.timeStatus = 'Running'
+      this.timer = window.setInterval(() => {
+        this.time -= 1
       }, 1000)
     },
-    clearCountDownUpdate(item) {
-      this.timer = 30
-      this.timeOutRefresh = ''
-      window.clearInterval(item)
+    pauseCountDown() {
+      window.clearInterval(this.timer)
+      this.timeStatus = 'Stopped'
+    },
+    clearCountDownUpdate() {
+      this.time = 30
+      this.timeStatus = 'Stopped'
+      window.clearInterval(this.timer)
     },
     changeSubRouteStops(index) {
       this.subRouteIndex = index
@@ -624,7 +650,7 @@ export default {
         .then(res => {
           const tempData = res.data
           if (this.timer !== 30) {
-            this.clearCountDownUpdate(this.timeOutRefresh)
+            this.clearCountDownUpdate()
           }
           this.routeData = tempData.filter(item => {
             return item.SubRoutes.length <= 2
@@ -667,7 +693,6 @@ export default {
           })
           this.outwardStopsArray = [].concat(...tempOutwardStops)
           this.returnStopsArray = [].concat(...tempReturnStops)
-
           if (this.outwardStopOfRouteData.length > 1) {
             this.subRouteName =
               this.outwardStopOfRouteData[
@@ -770,9 +795,9 @@ export default {
           })
           this.isLoading = false
           if (this.activeName === 'outward') {
-            this.setMarkers(this.outwardStopsArray)
+            this.map.addLayer(this.setMarkers(this.outwardStopsArray))
           } else {
-            this.setMarkers(this.returnStopsArray)
+            this.map.addLayer(this.setMarkers(this.returnStopsArray))
           }
         })
         .catch(err => {
@@ -797,9 +822,9 @@ export default {
           }
           this.busStopOfRouteData = res.data
           if (this.timer !== 30) {
-            this.clearCountDownUpdate(this.timeOutRefresh)
+            this.clearCountDownUpdate()
           }
-          this.countDownUpdate()
+          this.startCountDown()
           if (this.busStopOfRouteData.length > 0) {
             this.filterOutwardStopsData = []
             this.filterReturnStopsData = []
