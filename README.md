@@ -1,7 +1,7 @@
 # Taiwan Bus Timetable
 
 全台公車動態時刻查詢應用服務
-![](https://images2.imgbox.com/b5/9c/Hii9sko0_o.jpg)
+![image](https://github.com/jedchang/Taiwan-Bus-Timetable/blob/master/preview.jpg)
 
 ## Demo
 
