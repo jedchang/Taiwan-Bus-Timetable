@@ -40,6 +40,7 @@ https://jedchang.github.io/Taiwan-Bus-Timetable/
 - [x] 公車地圖模式
 - [x] RWD 版面樣式
 - [x] 手勢觸控滾動
+- [x] 改串接 TDX V2.1 API
 - [ ] 票價查詢
 
 ## Remark
